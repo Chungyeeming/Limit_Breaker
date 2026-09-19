@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "beyond_the_horizon",
+  "version": "${version}",
+  "name": "Beyond The Horizon",
+  "description": "Break the boundaries. Explore the infinite!",
+  "authors": [],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/beyond_the_horizon/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.client.beyond_horizonDataGenerator"
+    ],
+    "client": [
+      "org.client.beyond_horizonClient"
+    ],
+    "main": [
+      "org.beyond_horizon"
+    ]
+  },
+  "mixins": [
+    "beyond_the_horizon.mixins.json",
+    {
+      "config": "beyond_the_horizon.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
