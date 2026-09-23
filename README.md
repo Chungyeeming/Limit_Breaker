@@ -4,7 +4,9 @@
 
 **Shatter the 30-million-block virtual boundary and unlock the 32-bit mathematical limit ($X/Z = \pm 2,147,483,647$) for Minecraft 26.3.**
 
-**打破 Minecraft 26.3 版本中 3000 萬方塊的虛擬邊界，並突破 32 位元數學極限（$X/Z = \pm 2,147,483,647$）。**
+**打破 Minecraft 26.3 版本中 3000 萬方塊的虛擬邊界，並突破 32 位元數學極限（X/Z = 2,147,483,647）。**
+
+**打破 Minecraft 26.3 版本中 3000 万方块的虚拟边界，并突破 32 位元数学极限（X/Z = 2,147,483,647）。**
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-26.3-brightgreen.svg)](https://minecraft.net/)
 [![Modloader](https://img.shields.io/badge/Modloader-Fabric-blue.svg)](https://fabricmc.net/)
