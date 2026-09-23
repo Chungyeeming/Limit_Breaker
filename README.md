@@ -14,7 +14,8 @@
 <p>
   <b>Language / 語言：</b>
   <a href="#-english">English</a> | 
-  <a href="#-繁體中文">繁體中文</a>
+  <a href="#-繁體中文">繁體中文</a>  |
+  <a href="#-简体中文">简体中文</a>
 </p>
 
 </div>
@@ -131,4 +132,60 @@ Once installed, configure your world border using administrative commands:
 ---
 ### 🔜 開發路線圖
 * 還原經典 Beta 1.7.3 風格的「邊境之地」（Far Lands）噪音生成效果（目前正在微調「起司」狀地形及堆疊牆體地形的生成參數）
+</details>
+
+<details open>
+<summary><b>📖 繁体中文 (Click to collapse / 点击折叠)</b></summary>
+
+<br>
+
+### 📖 简介
+
+在原版 Minecraft 中，可游玩的世界被严格限制在「3000万方块」的边界内。一旦越过此界限，便会导致幽灵方块、实体穿模、渲染黑洞以及致命的伺服器崩溃。
+
+**Limit Breaker** 是一款专为 **Minecraft 26.3 (Fabric)** 设计的底层座标扩展与引擎稳定性模组。透过重构座标打包、杂凑映射及空间储存调度机制，该模组彻底消除了世界边界限制，将世界半径扩展至 32 位元有符号整数的理论极限：**21.4 亿方块**（世界总直径超过 **42.9 亿方块**）。
+
+即使在距离原点 20 亿方块之遥，方块互动、结构生成、物品拾取及近战格斗依然保持极高的稳定性和反应速度。
+
+### ✨ 特性
+
+#### 🌍 完整的 32 位元世界边界
+* 将最大世界边界直径扩展至 `(Integer.MAX_VALUE - 16) * 2`（约 42.9 亿方块）。
+* 无缝支援 `/worldborder set` 指令及专用伺服器（Dedicated Server）配置，以设定极值边界。
+
+#### 🔢 高精度 64 位元座标存储
+* 彻底重构 `BlockPos`、`SectionPos` 和 `ChunkPos` 的位元打包（bit-packing）方式，防止座标在超过 3,000 万方块时发生位元截断。
+* 采用记忆体映射的条带化杂凑快取（striped hash caches），消除在超远座标处的键冲突。
+
+#### 🖥️ 现代渲染管线整合 (Minecraft 26.3)
+* **RotatingSectionStorage 支援**：原生适配 26.3 的现代化区块分段（section）储存机制，支援水平环面模运算回绕（toroidal modulo wrapping）及动态垂直滑动视窗。
+* **八叉树稳定性**：修复根边界框（root bounding box）的 2 的幂次对齐问题，消除视锥剔除（frustum culling）期间的 `StackOverflowError` 及区块渲染空洞。
+
+#### 🛡️ 强化伺服器防御
+* **世界生成**：修复含水层（Aquifer）密度体素的整数溢出、废弃矿井生成死循环以及越界区块调度断言错误。
+* **实体与寻路**：修复了 AI 在世界边界附近游荡时可能引发的 `NegativeArraySizeException`（数组大小为负异常），并优化了实体区块查找逻辑，以确保物品拾取和碰撞检测的准确性。
+* **光照引擎**：针对跨越未载入区块边界的光照传播实现了空安全（null-safe）回退机制，从而避免 `NullPointerException`（NPE，空指针异常）。
+* **并发保护**：绕过了并行特征生成（parallel feature generation）过程中的线程锁断言检查，确保与第三方世界生成模组（mods）具有广泛的兼容性。
+
+### 🚀 快速入门
+
+安装完成后，请使用管理员指令配置世界边界：
+
+```bash
+# 1. 将世界边界扩展至最大物理直径（约 42.9 亿格）
+/worldborder set 4294967262
+
+# 2. 传送至 32 位元座标系的极限边缘
+/tp @s 2147483600 100 0
+```
+---
+### ✅ 模组状态
+
+* 32 位元座标展开支援（在 ±2.14 × 10^9 范围内稳定运作）
+* 修正了 Minecraft 26.3 版本的 `RotatingSectionStorage` 及八叉树（Octree）渲染问题
+* 防止伺服器端世界生成、光照计算及实体 AI 相关的崩溃
+* 碰撞箱索引优化及战斗/物品拾取逻辑修复
+---
+### 🔜 开发路线图
+* 还原经典 Beta 1.7.3 风格的「边境之地」（Far Lands）噪音生成效果（目前正在微调「起司」状地形及堆叠墙体地形的生成参数）
 </details>
