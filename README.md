@@ -105,7 +105,8 @@ Once installed, configure your world border using administrative commands:
 * **八叉樹穩定性**：修復根邊界框（root bounding box）的 2 的冪次對齊問題，消除視錐剔除（frustum culling）期間的 `StackOverflowError` 及區塊渲染空洞。
 
 #### 🛡️ 強化伺服器防禦
-* **世界生成**：修復含水層（Aquifer）密度體素的整數溢出、廢棄礦井生成死循環以及越界區塊調度斷言錯誤。 * **實體與尋路**：修復了 AI 在世界邊界附近遊蕩時可能引發的 `NegativeArraySizeException`（數組大小為負異常），並優化了實體區塊查找邏輯，以確保物品拾取和碰撞檢測的準確性。
+* **世界生成**：修復含水層（Aquifer）密度體素的整數溢出、廢棄礦井生成死循環以及越界區塊調度斷言錯誤。
+*  * **實體與尋路**：修復了 AI 在世界邊界附近遊蕩時可能引發的 `NegativeArraySizeException`（數組大小為負異常），並優化了實體區塊查找邏輯，以確保物品拾取和碰撞檢測的準確性。
 * **光照引擎**：針對跨越未載入區塊邊界的光照傳播實現了空安全（null-safe）回退機制，從而避免 `NullPointerException`（NPE，空指針異常）。
 * **並發保護**：繞過了並行特徵生成（parallel feature generation）過程中的線程鎖斷言檢查，確保與第三方世界生成模組（mods）具有廣泛的兼容性。
 
