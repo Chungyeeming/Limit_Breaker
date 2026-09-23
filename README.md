@@ -8,7 +8,7 @@
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-26.3-brightgreen.svg)](https://minecraft.net/)
 [![Modloader](https://img.shields.io/badge/Modloader-Fabric-blue.svg)](https://fabricmc.net/)
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://adoptium.net/)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <p>
