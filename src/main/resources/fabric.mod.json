@@ -11,13 +11,13 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "org.client.beyond_horizonDataGenerator"
+      "org.beyond_horizon.client.beyond_horizonDataGenerator"
     ],
     "client": [
-      "org.client.beyond_horizonClient"
+      "org.beyond_horizon.client.beyond_horizonClient"
     ],
     "main": [
-      "org.beyond_horizon"
+      "org.beyond_horizon.beyond_horizon"
     ]
   },
   "mixins": [
