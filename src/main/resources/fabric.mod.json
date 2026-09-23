@@ -6,7 +6,7 @@
   "description": "Break the boundaries. Explore the infinite!",
   "authors": [],
   "contact": {},
-  "license": "GPL-3.0",
+  "license": "LGPL-3.0",
   "icon": "assets/limit_breaker/icon.png",
   "environment": "*",
   "entrypoints": {
