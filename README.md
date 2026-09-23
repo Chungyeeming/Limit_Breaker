@@ -131,8 +131,3 @@ Once installed, configure your world border using administrative commands:
 ### 🔜 開發路線圖
 * 還原經典 Beta 1.7.3 風格的「邊境之地」（Far Lands）噪音生成效果（目前正在微調「起司」狀地形及堆疊牆體地形的生成參數）
 </details>
-
-
-
-
-
