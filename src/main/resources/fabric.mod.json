@@ -1,31 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "beyond_the_horizon",
+  "id": "limit_breaker",
   "version": "${version}",
-  "name": "Beyond The Horizon",
+  "name": "Limit Breaker",
   "description": "Break the boundaries. Explore the infinite!",
   "authors": [],
   "contact": {},
   "license": "LGPL-3.0",
-  "icon": "assets/beyond_the_horizon/icon.png",
+  "icon": "assets/limit_breaker/icon.png",
   "environment": "*",
   "entrypoints": {
-    "fabric-datagen": [
-      "org.beyond_horizon.client.beyond_horizonDataGenerator"
-    ],
-    "client": [
-      "org.beyond_horizon.client.beyond_horizonClient"
-    ],
-    "main": [
-      "org.beyond_horizon.beyond_horizon"
-    ]
+    "main": []
   },
   "mixins": [
-    "beyond_the_horizon.mixins.json",
-    {
-      "config": "beyond_the_horizon.client.mixins.json",
-      "environment": "client"
-    }
+    "limit_breaker.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
