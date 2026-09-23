@@ -137,7 +137,7 @@ Once installed, configure your world border using administrative commands:
 </details>
 
 <details open>
-<summary><b>📖 繁体中文 (Click to collapse / 点击折叠)</b></summary>
+<summary><b>📖 简体中文 (Click to collapse / 点击折叠)</b></summary>
 
 <br>
 
