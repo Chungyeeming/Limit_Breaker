@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.RENDERER;
+package org.limit_breaker.client.MIXINS.RENDERER;
 import net.minecraft.client.renderer.SectionOcclusionGraph;
 import net.minecraft.client.renderer.ViewArea;
 

@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.RENDERER;
+package org.limit_breaker.client.MIXINS.RENDERER;
 
 import net.minecraft.client.renderer.debug.LightDebugRenderer;
 import org.limit_breaker.UTILITIES.POSITION.IntSectionPos;

@@ -1,31 +1,22 @@
-package org.limit_breaker.client.mixins.FIX.RENDERER;
+package org.limit_breaker.client.MIXINS.FIX.RENDERER;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.phys.AABB;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
-/**
- * RenderSection.setSectionNode 的 X/Y/Z 极端 section 坐标溢出修复。
- */
 @Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection")
 public abstract class SectionRenderDispatcher$RenderSectionMixin {
 
-    @Shadow
-    private volatile long sectionNode;
+    @Shadow private volatile long sectionNode;
+    @Shadow private AABB bb;
+    @Shadow @Final private BlockPos.MutableBlockPos renderOrigin;
+    @Shadow private void reset() {}
 
-    @Shadow
-    private AABB bb;
-
-    @Shadow
-    @Final
-    private BlockPos.MutableBlockPos renderOrigin;
-
-    @Shadow
-    private void reset() {
-    }
-
-    /** section→block long 化后饱和到 int 边界。 */
     @Unique
     private static int saturateBlockCoord(int sectionCoord) {
         long block = (long) sectionCoord << 4;

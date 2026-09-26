@@ -29,6 +29,7 @@ public class WorldBorderMixin {
 
     @ModifyConstant(method = "<init>(Lnet/minecraft/world/level/border/WorldBorder$Settings;)V", constant = @Constant(doubleValue = 5.9999968E7D))
     private double OnInitB(double value) {
-        return (MAX_BLOCK - 1) * 2.0;
+        // 改為 2147483631 * 2，讓光幕直接卡在地形盡頭
+        return (MAX_BLOCK - 16.0) * 2.0;
     }
 }

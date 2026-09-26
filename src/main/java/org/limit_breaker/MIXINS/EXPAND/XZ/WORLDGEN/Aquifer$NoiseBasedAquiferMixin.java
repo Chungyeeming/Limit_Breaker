@@ -4,10 +4,7 @@ import net.minecraft.world.level.levelgen.Aquifer;
 import org.limit_breaker.UTILITIES.MAPPER.AquiferUtil;
 import org.limit_breaker.UTILITIES.POSITION.AquiferPos;
 import org.limit_breaker.UTILITIES.POSITION.IntBlockPos;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -17,9 +14,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(Aquifer.NoiseBasedAquifer.class)
 public abstract class Aquifer$NoiseBasedAquiferMixin {
 
+    @Final
     @Shadow
     private Aquifer.FluidStatus[] aquiferCache;
 
+    @Final
     @Shadow
     private long[] aquiferLocationCache;
 

@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.RENDERER;
+package org.limit_breaker.client.MIXINS.RENDERER;
 
 
 import net.minecraft.client.renderer.LevelRenderer;
@@ -72,6 +72,7 @@ public abstract class ViewAreaMixin {
     }
 
     /** 竖直窗口判定改成相机段加减半高，XZ 判定与原版一致。 */
+    @Unique
     private boolean containsSection(int sectionX, int sectionY, int sectionZ) {
         int half = this.sectionGridSizeY / 2;
         int camSectionY = this.cameraSectionPos.y();

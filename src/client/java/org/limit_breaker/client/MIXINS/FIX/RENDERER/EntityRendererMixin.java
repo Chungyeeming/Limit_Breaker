@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.FIX.RENDERER;
+package org.limit_breaker.client.MIXINS.FIX.RENDERER;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;

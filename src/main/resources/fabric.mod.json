@@ -13,7 +13,8 @@
     "main": []
   },
   "mixins": [
-    "limit_breaker.mixins.json"
+    "limit_breaker.mixins.json",
+    "limit_breaker.client.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

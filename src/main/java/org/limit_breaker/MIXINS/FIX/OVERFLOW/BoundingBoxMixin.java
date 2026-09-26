@@ -7,18 +7,48 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static org.limit_breaker.UTILITIES.MainNumbers.MAX_BLOCK;
 
-/**
- * BoundingBox 极端坐标修复（moved 越界拒绝 + fromCorners max clamp）。
- */
 @Mixin(BoundingBox.class)
-public class BoundingBoxMixin {
+public abstract class BoundingBoxMixin {
 
-    @Shadow
-    private int minX, minY, minZ, maxX, maxY, maxZ;
+    @Shadow private int minX;
+    @Shadow private int minY;
+    @Shadow private int minZ;
+    @Shadow private int maxX;
+    @Shadow private int maxY;
+    @Shadow private int maxZ;
+
+    /**
+     * 核心修復：直接攔截六參數建構子末端。
+     * 當 maxX / maxZ 因 32 位元整數溢位變成負數時，
+     * 原版的 Math.min 會把結構盒膨脹成覆蓋整個世界的 42 億格巨型反序盒。
+     * 此處將溢位邊界強制截斷（Clamp）在世界物理邊界 MAX_BLOCK。
+     */
+    @Inject(method = "<init>(IIIIII)V", at = @At("TAIL"))
+    private void fixConstructorOverflow(int rawMinX, int rawMinY, int rawMinZ, int rawMaxX, int rawMaxY, int rawMaxZ, CallbackInfo ci) {
+        // 修復 X 軸跨越 32 位元上限的溢位
+        if (rawMinX > 0 && rawMaxX < 0) {
+            this.minX = rawMinX;
+            this.maxX = MAX_BLOCK - 2;
+        } else if (rawMinX < 0 && rawMaxX < 0 && rawMinX > rawMaxX) {
+            // 修復負數邊緣的反向組件
+            this.minX = rawMaxX;
+            this.maxX = rawMinX;
+        }
+
+        // 修復 Z 軸跨越 32 位元上限的溢位
+        if (rawMinZ > 0 && rawMaxZ < 0) {
+            this.minZ = rawMinZ;
+            this.maxZ = MAX_BLOCK - 2;
+        } else if (rawMinZ < 0 && rawMaxZ < 0 && rawMinZ > rawMaxZ) {
+            this.minZ = rawMaxZ;
+            this.maxZ = rawMinZ;
+        }
+    }
 
     @Inject(method = "moved", at = @At("HEAD"), cancellable = true)
     private void safeMoved(int dx, int dy, int dz, CallbackInfoReturnable<BoundingBox> cir) {
@@ -37,21 +67,22 @@ public class BoundingBoxMixin {
         }
     }
 
-    @Inject(method = "fromCorners", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "fromCorners", at = @At("HEAD"), cancellable = true)
     private static void clampFromCorners(Vec3i pos0, Vec3i pos1, CallbackInfoReturnable<BoundingBox> cir) {
-        BoundingBox box = cir.getReturnValue();
-        int newMaxX = Math.min(box.maxX(), MAX_BLOCK - 2);
-        int newMaxY = Math.min(box.maxY(), MAX_BLOCK - 2);
-        int newMaxZ = Math.min(box.maxZ(), MAX_BLOCK - 2);
-        if (newMaxX == box.maxX() && newMaxY == box.maxY() && newMaxZ == box.maxZ()) {
-            return; // 正常 box：放行
-        }
-        cir.setReturnValue(new BoundingBox(
-                Math.min(box.minX(), newMaxX),
-                Math.min(box.minY(), newMaxY),
-                Math.min(box.minZ(), newMaxZ),
-                newMaxX,
-                newMaxY,
-                newMaxZ));
+        // 在進入建構子前先做 64 位元防溢位排序與截斷
+        long minX = Math.min((long) pos0.getX(), (long) pos1.getX());
+        long maxX = Math.max((long) pos0.getX(), (long) pos1.getX());
+        long minZ = Math.min((long) pos0.getZ(), (long) pos1.getZ());
+        long maxZ = Math.max((long) pos0.getZ(), (long) pos1.getZ());
+
+        int clampedMinX = (int) Math.max(minX, -MAX_BLOCK + 2);
+        int clampedMaxX = (int) Math.min(maxX, MAX_BLOCK - 2);
+        int clampedMinZ = (int) Math.max(minZ, -MAX_BLOCK + 2);
+        int clampedMaxZ = (int) Math.min(maxZ, MAX_BLOCK - 2);
+
+        int minY = Math.min(pos0.getY(), pos1.getY());
+        int maxY = Math.max(pos0.getY(), pos1.getY());
+
+        cir.setReturnValue(new BoundingBox(clampedMinX, minY, clampedMinZ, clampedMaxX, maxY, clampedMaxZ));
     }
 }

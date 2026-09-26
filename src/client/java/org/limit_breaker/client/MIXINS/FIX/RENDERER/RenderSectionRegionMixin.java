@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.FIX.RENDERER;
+package org.limit_breaker.client.MIXINS.FIX.RENDERER;
 
 import net.minecraft.client.renderer.chunk.RenderSectionRegion;
 import net.minecraft.core.BlockPos;
@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -21,12 +22,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RenderSectionRegion.class)
 public abstract class RenderSectionRegionMixin {
 
+    @Final
     @Shadow
     private int minSectionX;
 
+    @Final
     @Shadow
     private int minSectionY;
 
+    @Final
     @Shadow
     private int minSectionZ;
 

@@ -1,4 +1,4 @@
-package org.limit_breaker.client.mixins.RENDERER;
+package org.limit_breaker.client.MIXINS.RENDERER;
 
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,9 +1,21 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.limit_breaker.client.mixins",
+  "package": "org.limit_breaker.client.MIXINS",
   "compatibilityLevel": "JAVA_25",
   "client": [
+    "FIX.RENDERER.EntityRendererMixin",
+    "FIX.RENDERER.LevelRendererMixin",
+    "FIX.RENDERER.RenderSectionRegionMixin",
+    "FIX.RENDERER.SectionRenderDispatcher$RenderSectionMixin",
+    "FIX.RENDERER.WeatherEffectRendererMixin",
+    "RENDERER.ChunkBorderRendererMixin",
+    "RENDERER.LightDebugRendererMixin",
+    "RENDERER.OctreeBranchMixin",
+    "RENDERER.OctreeMixin",
+    "RENDERER.SectionCopyMixin",
+    "RENDERER.SectionOcclusionGraphMixin",
+    "RENDERER.ViewAreaMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -12,17 +24,5 @@
     "requireAnnotations": true
   },
   "mixins": [
-    "FIX.RENDERER.EntityRendererMixin",
-    "FIX.RENDERER.LevelRendererMixin",
-    "FIX.RENDERER.RenderSectionRegionMixin",
-    "FIX.RENDERER.SectionRenderDispatcher$RenderSectionMixin",
-    "FIX.RENDERER.WeatherEffectRendererMixin",
-    "RENDERER.ChunkBorderRendererMixin",
-    "RENDERER.LightDebugRendererMixin",
-    "RENDERER.OctreeMixin",
-    "RENDERER.SectionCopyMixin",
-    "RENDERER.SectionOcclusionGraphMixin",
-    "RENDERER.SectionRenderDispatcher$RenderSectionMixin",
-    "RENDERER.ViewAreaMixin"
   ]
 }
